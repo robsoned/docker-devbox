@@ -13,8 +13,8 @@ This project provides a Dockerized development environment using Ubuntu 24.04, N
 
 ## Usage
 
-This image is itented to be used as a base image for your development environment. You can use it in your `Dockerfile` like this:
+This image is intended to be a base image for your development environment. You can use it in your `Dockerfile` like this:
 
 ```Dockerfile
-FROM ghcr.io/robsoned/docker-devbox:latestdevbox:latest
+FROM ghcr.io/robsoned/docker-devbox:latest
 ```
