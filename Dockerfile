@@ -7,23 +7,13 @@ ENV DEVBOX_USE_VERSION=0.13.7 \
 ARG WORKDIR=/app \
     DEVBOX_PACKAGES=git@2.47.1 nushell@0.101.0
 
-RUN apt-get update && apt-get install -y curl xz-utils sudo
+RUN apt-get update && apt-get install -y curl xz-utils
 
 WORKDIR ${WORKDIR}
 
-RUN chown -R ubuntu:ubuntu ${WORKDIR}
-
-RUN echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu
-
-RUN curl -L https://releases.nixos.org/nix/nix-${NIX_VERSION}/install | sh -s -- --daemon \
-    && chown -R ubuntu:ubuntu /nix
+RUN curl -L https://releases.nixos.org/nix/nix-${NIX_VERSION}/install | sh -s -- --daemon
 
 RUN curl -fsSL https://get.jetify.com/devbox | FORCE=1 bash 
-
-RUN chown ubuntu:ubuntu /usr/local/bin/devbox \
-    && chown -R ubuntu:ubuntu /nix
-
-USER ubuntu
 
 RUN devbox global add ${DEVBOX_PACKAGES} \
     && devbox global install \
