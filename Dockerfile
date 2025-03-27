@@ -11,9 +11,16 @@ RUN apt-get update && apt-get install -y curl xz-utils sudo
 
 WORKDIR ${WORKDIR}
 
-RUN curl -L https://releases.nixos.org/nix/nix-${NIX_VERSION}/install | sh -s -- --daemon
+RUN curl -L https://releases.nixos.org/nix/nix-${NIX_VERSION}/install | sh -s -- --daemon \
+    && chown -R ubuntu:ubuntu /nix
 
-RUN curl -fsSL https://get.jetify.com/devbox | FORCE=1 bash \
-    && devbox global add ${DEVBOX_PACKAGES} \
+RUN curl -fsSL https://get.jetify.com/devbox | FORCE=1 bash 
+
+RUN chown ubuntu:ubuntu /usr/local/bin/devbox \
+    && chown -R ubuntu:ubuntu /nix
+
+USER ubuntu
+
+RUN devbox global add ${DEVBOX_PACKAGES} \
     && devbox global install \
     && echo 'eval "$(devbox global shellenv)"' >> ~/.bashrc
