@@ -11,6 +11,10 @@ RUN apt-get update && apt-get install -y curl xz-utils sudo
 
 WORKDIR ${WORKDIR}
 
+RUN chown -R ubuntu:ubuntu ${WORKDIR}
+
+RUN echo "ubuntu ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu
+
 RUN curl -L https://releases.nixos.org/nix/nix-${NIX_VERSION}/install | sh -s -- --daemon \
     && chown -R ubuntu:ubuntu /nix
 
