@@ -17,4 +17,5 @@ RUN curl -fsSL https://get.jetify.com/devbox | FORCE=1 bash
 
 RUN devbox global add ${DEVBOX_PACKAGES} \
     && devbox global install \
-    && echo 'eval "$(devbox global shellenv)"' >> ~/.bashrc
+    && echo 'eval "$(devbox global shellenv)"' >> ~/.bashrc \
+    && git config --global core.pager cat
