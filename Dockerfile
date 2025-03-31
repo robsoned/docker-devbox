@@ -19,4 +19,3 @@ RUN devbox global add ${DEVBOX_PACKAGES} \
     && devbox global install \
     && echo 'eval "$(devbox global shellenv)"' >> ~/.bashrc 
     
-RUN git config --global core.pager cat
